@@ -1,0 +1,74 @@
+
+services:
+  eureka-server:
+    image: openjdk:17
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    volumes:
+      - ./eureka-server:/app
+    working_dir: /app
+    command: ["java", "-jar", "target/eureka-server.jar"]
+    networks:
+      - app-network
+
+  client-service:
+    build:
+      context: ./client-service
+    container_name: client-service
+    ports:
+      - "8090:8090"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      EUREKA_SERVER_URL: http://eureka-server:8761/eureka
+    depends_on:
+      - eureka-server
+    networks:
+      - app-network
+
+  produit-service:
+    build:
+      context: ./produit-service
+    container_name: produit-service
+    ports:
+      - "8091:8091"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      EUREKA_SERVER_URL: http://eureka-server:8761/eureka
+    depends_on:
+      - eureka-server
+    networks:
+      - app-network
+
+  commande-service:
+    build:
+      context: ./commande-service
+    container_name: commande-service
+    ports:
+      - "8092:8092"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      EUREKA_SERVER_URL: http://eureka-server:8761/eureka
+    depends_on:
+      - eureka-server
+      - client-service
+      - produit-service
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: microservices
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
