@@ -24,6 +24,20 @@ public class ProduitServiceApplication {
                     .build();
 
             produitRepository.save(p1);
+
+            Produit p2 = Produit.builder()
+                    .libelle("Tank top")
+                    .prix(300.4)
+                    .build();
+
+            produitRepository.save(p2);
+
+            Produit p3 = Produit.builder()
+                    .libelle("T-shirt")
+                    .prix(20.9)
+                    .build();
+
+            produitRepository.save(p3);
         };
     }
 

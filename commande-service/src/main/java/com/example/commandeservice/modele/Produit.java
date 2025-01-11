@@ -8,7 +8,7 @@ import lombok.*;
 @Builder
 @ToString
 public class Produit {
-    private final Long idProduit;
+    private Long idProduit;
     private final String libelle;
     private final Double prix;
 }

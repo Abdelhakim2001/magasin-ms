@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 
 
 @SpringBootApplication
-@EnableDiscoveryClient // @EnableEurekaClient is not supported anymore
+//@EnableDiscoveryClient
 public class ClientServiceApplication {
 
     public static void main(String[] args) {

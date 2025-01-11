@@ -22,16 +22,41 @@ public class CommandeServiceApplication {
         return args -> {
 
             Commande commande = Commande.builder()
+                    .idClient(1L)
+                    .idProduit(1L)
                     .quantite(500)
-                    .adresseLivraison("Rabat")
                     .build();
 
             commandeRepository.save(commande);
 
-            System.out.println("Quantité des produits : "+commande.getQuantite());
-            System.out.println("http://localhost:8090");
-            System.out.println(clientRestClient.getClients());
 
+            Commande cm2 = Commande.builder()
+                    .idClient(1L)
+                    .idProduit(2L)
+                    .quantite(30)
+                    .build();
+
+            commandeRepository.save(cm2);
+            Commande cm3 = Commande.builder()
+                    .idClient(1L)
+                    .idProduit(1L)
+                    .quantite(5)
+                    .build();
+            commandeRepository.save(cm3);
+
+            Commande cm4 = Commande.builder()
+                    .idClient(2L)
+                    .idProduit(2L)
+                    .quantite(7)
+                    .build();
+            commandeRepository.save(cm4);
+
+            Commande cm5 = Commande.builder()
+                    .idClient(3L)
+                    .idProduit(3L)
+                    .quantite(10)
+                    .build();
+            commandeRepository.save(cm5);
         };
 
 

@@ -1,13 +1,10 @@
 package com.example.commandeservice.entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.commandeservice.modele.Client;
+import com.example.commandeservice.modele.Produit;
+import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
 
 @Entity
 @Getter
@@ -19,7 +16,16 @@ import java.util.List;
 public class Commande {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCommande;
-    private Double totalMontant;
+    private Integer quantite;
     private String adresseLivraison;
+
+    private Long idProduit;
+    @Transient
+    private Produit produit;
+
+    private Long idClient;
+    @Transient
+    private Client client;
+
 
 }

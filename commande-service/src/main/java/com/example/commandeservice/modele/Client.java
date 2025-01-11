@@ -12,7 +12,7 @@ import lombok.*;
     @Builder
     @ToString
     public class Client {
-        private final Long idClient;
+        private Long idClient;
         private final String nom;
         private final String prenom;
     }

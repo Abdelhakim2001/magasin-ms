@@ -20,9 +20,10 @@ public class ProduitController {
         return produitRepository.findAll();
     }
 
-    @GetMapping("/produits/{id}")
+    @GetMapping("produits/{id}")
     public Produit aProduit(@PathVariable Long id){
-        return produitRepository.findById(id).get();
+        return produitRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Produit not found with ID : "+id));
     }
 
     @PostMapping("/produits")

@@ -21,9 +21,10 @@ public class ClientController {
     }
 
 
-    @GetMapping("/clients/{id}")
-    public Client aClient(@PathVariable Long id){
-        return clientRepository.findById(id).get();
+    @GetMapping("clients/{id}")
+    public Client getClientById(@PathVariable Long id) {
+        return clientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Client not found with ID: " + id));
     }
 
     @PostMapping("/client")
